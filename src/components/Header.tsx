@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import React, { useEffect } from "react";
 import Modal from "./Modal";
 
@@ -10,11 +9,10 @@ const Header = () => {
     >
       <div className="hero-content text-center text-soft-white">
         <div className="max-w-md">
-          <h1 className="text-5xl font-bold">Hello there</h1>
+          <h1 className="text-5xl font-bold">Welcome to Helpateer</h1>
           <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            We are a team of people that want to motivate folks to help elderly.
+            Join Up on our mission to better the World!
           </p>
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <Modal />
