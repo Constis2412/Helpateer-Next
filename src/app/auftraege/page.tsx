@@ -1,17 +1,28 @@
-import React from 'react';
-
+import SideBar from "@/components/SideBar";
+import { Sidebar } from "lucide-react";
+import React, { Children, useState } from "react";
 
 const AuftraegeSeite = () => {
+  // State hier für: varÜberDieSeiteZumAnzeigen
+  // const [varÜberDieSeiteZumAnzeigen, setVarÜberDieSeiteZumAnzeigen] = useState(
+  //   <KartenMap />
+  // );
+
+  // 1. <SideBar varÜberDieSeiteZumAnzeigen={varÜberDieSeiteZumAnzeigen} setVarÜberDieSeiteZumAnzeigen={setVarÜberDieSeiteZumAnzeigen} />
+  // 2. In der SideBar die State updaten (setVarÜberDieSeiteZumAnzeigen(karteBspw))
+  // 3. In der SideBar die getter und setter verwenden
+
   return (
-    <div className="grid grid-cols-3 gap-4 h-screen">
-      <div className="col-span-1 bg-cyan-400 p-4" >
-        
-        
-      </div>
-      <div className="col-span-2"> 
-     
+    <div>
+      <div className="grid grid-cols-3 gap-4 h-screen">
+        <SideBar />
+        {/* {varÜberDieSeiteZumAnzeigen} */}
+        <div className="col-span-2">
+          <button className="btn btn-info">Auftrag erstellen</button>
+        </div>
       </div>
     </div>
   );
 };
+
 export default AuftraegeSeite;
