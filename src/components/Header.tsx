@@ -7,7 +7,7 @@ const Header = () => {
       className="hero h-[40%] bg-base-200"
       style={{ backgroundImage: "url(bled-2582655_1920.jpg)" }}
     >
-      <div className="hero-content text-center text-soft-white">
+      <div className="hero-content text-center">
         <div className="max-w-md">
           <h1 className="text-5xl font-bold">Welcome to Helpateer</h1>
           <p className="py-6">
