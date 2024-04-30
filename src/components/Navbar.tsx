@@ -14,7 +14,7 @@ const Navbar = () => {
         </div>
         <DarkLightMode />
         <div>
-          <Link href="/" className="btn btn-ghost">
+          <Link href="/auftraege" className="btn btn-ghost">
             Aufträge
           </Link>
         </div>
