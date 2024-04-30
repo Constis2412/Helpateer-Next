@@ -9,12 +9,9 @@ const AuftraegeSeite = () => {
         
       </div>
       <div className="col-span-2"> 
-      <button className="btn btn-info">Auftrag erstellen</button> 
+     
       </div>
     </div>
   );
 };
-
-
-
 export default AuftraegeSeite;
