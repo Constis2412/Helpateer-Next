@@ -6,7 +6,7 @@ export default function auftraegeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="grid grid-cols-3 gap-4 h-screen">
       <SideBar />
       {children}
     </div>

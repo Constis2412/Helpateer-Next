@@ -14,12 +14,9 @@ const AuftraegeSeite = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4 h-screen">
-        <SideBar />
-        {/* {varÜberDieSeiteZumAnzeigen} */}
-        <div className="col-span-2">
-          <button className="btn btn-info">Auftrag erstellen</button>
-        </div>
+      {/* {varÜberDieSeiteZumAnzeigen} */}
+      <div className="col-span-2">
+        <button className="btn btn-info">Auftrag erstellen</button>
       </div>
     </div>
   );
