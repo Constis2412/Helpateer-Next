@@ -13,7 +13,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Mensch {
-  id   String @id @default(cuid())
-  name String
+model Post {
+  id String @id @default(cuid())
+  title String @db.VarChar(255)
+  content String @db.VarChar(255)
+  location String @db.VarChar(30)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  dueDate DateTime 
+  dueTime DateTime
+  author User @relation(fields: [authorId], references: [id], name: "Postauthor")
+  authorId String
+  helper User @relation(fields: [helperId], references: [id], name: "Posthelper")
+  helperId String
 }
+
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  password String @db.VarChar(20)
+  firstname String @db.VarChar(20)
+  lastname String @db.VarChar(20)
+  age Int 
+  disability String? @db.VarChar(255)
+  bio String? @db.VarChar(255)
+  hilfbeduerftig Boolean @default(false)
+  sex Sex @relation(fields: [sexId], references: [id])
+  sexId String @unique
+  createdposts Post[] @relation("Postauthor")
+  acceptedposts Post[] @relation("Posthelper")
+}
+
+model Sex {
+  id String @id @default(cuid())
+  name String @unique
+  user User?
+}
+
+
