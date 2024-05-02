@@ -19,7 +19,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-none">
-          <Link href="/" className="btn btn-ghost">
+          <Link href="/" className="btn btn-ghost hidden">
             Extra?
           </Link>
         </div>
