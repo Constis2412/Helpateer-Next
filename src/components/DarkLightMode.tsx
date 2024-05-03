@@ -1,7 +1,64 @@
-"use Client";
 import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 
+// helperfunktions to get and set the Cookies
+function setCookie(name: string, value: string, days: number) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(
+    value
+  )}; expires=${expires}; path=/`;
+}
+
+function getCookie(name: string): string | null {
+  const value = `; ${document.cookie}`;
+  //spliting the cookie for the name
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    const cookiePart = parts.pop();
+    //checking if it is not empty
+    if (cookiePart) {
+      const cookieValue = cookiePart.split(";").shift();
+      return cookieValue ? decodeURIComponent(cookieValue) : null;
+    }
+  }
+  return null;
+}
+
+const DarkLightMode = () => {
+  const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return getCookie("theme") || "cmyk"; // Default to "cmyk" if no cookie is set
+    }
+    return "cmyk";
+  });
+
+  useEffect(() => {
+    // Check if window is available when component mounts
+    if (typeof window !== "undefined") {
+      themeChange(false); // Apply theme change on the client side
+      const storedTheme = getCookie("theme");
+      if (storedTheme) {
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+      setLoading(false);
+    }
+  }, [theme]); // Re-apply when theme changes
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Update theme state and set cookie
+  const handleThemeToggle = () => {
+    const newTheme = theme === "cmyk" ? "night" : "cmyk";
+    setTheme(newTheme);
+    if (typeof window !== "undefined") {
+      setCookie("theme", newTheme, 30); // Set cookie to expire in 30 days
+    }
+  };
+
+  /*
 // State to keep track of whether dark mode is enabled
 const DarkLightMode = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +74,7 @@ const DarkLightMode = () => {
     // Check if window is available when component mounts
     if (typeof window !== "undefined") {
       themeChange(false); // Apply theme change on the client side
-      const storedTheme = window.localStorage.getItem("thme");
+      const storedTheme = window.localStorage.getItem("theme");
       if (storedTheme) {
         document.documentElement.setAttribute("data-theme", theme);
       }
@@ -37,6 +94,8 @@ const DarkLightMode = () => {
       window.localStorage.setItem("theme", newTheme);
     }
   };
+
+*/
   return (
     <label className="cursor-pointer grid place-items-center">
       <input
