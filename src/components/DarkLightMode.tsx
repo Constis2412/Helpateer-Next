@@ -17,7 +17,7 @@ const DarkLightMode = () => {
     // Check if window is available when component mounts
     if (typeof window !== "undefined") {
       themeChange(false); // Apply theme change on the client side
-      const storedTheme = window.localStorage.getItem("thme");
+      const storedTheme = window.localStorage.getItem("theme");
       if (storedTheme) {
         document.documentElement.setAttribute("data-theme", theme);
       }
