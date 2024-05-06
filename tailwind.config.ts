@@ -35,6 +35,9 @@ const config: Config = {
           ".shadow-2xl": {
             "--tw-shadow": " 0 25px 50px -12px rgb(255 255 255/ 0.25);",
           },
+          ".shadow-inner": {
+            "--tw-shadow": "inset 0 2px 4px 0 rgb(255 255 255/ 0.05);",
+          },
         },
       },
     ],
