@@ -27,7 +27,17 @@ const config: Config = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["cmyk", "night"],
+    themes: [
+      "cmyk",
+      {
+        night: {
+          ...require("daisyui/src/theming/themes")["night"],
+          ".shadow-2xl": {
+            "--tw-shadow": " 0 25px 50px -12px rgb(255 255 255/ 0.25);",
+          },
+        },
+      },
+    ],
   },
   darkMode: "class",
 };

@@ -3,11 +3,8 @@ import Link from "next/link";
 
 const User = () => {
   return (
-    <div className="container">
-      <div
-        id="shadow"
-        className="grid grid-cols-3 grid-rows-2 w-screen-50 bg-base-100 shadow-2xl rounded-3xl overflow-auto my-4 px-8"
-      >
+    <div className="container pt-16 px-8">
+      <div className="grid grid-cols-3 grid-rows-2 w-screen-50 bg-base-100 shadow-2xl rounded-3xl overflow-auto px-8">
         <div className="avatar justify-center items-center flex flex-col pt-8">
           <div className="w-24 rounded-full">
             <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
