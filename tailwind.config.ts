@@ -28,7 +28,6 @@ const config: Config = {
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
-      "cmyk",
       {
         night: {
           ...require("daisyui/src/theming/themes")["night"],
@@ -37,6 +36,17 @@ const config: Config = {
           },
           ".shadow-inner": {
             "--tw-shadow": "inset 0 2px 4px 0 rgb(255 255 255/ 0.05);",
+          },
+        },
+      },
+      {
+        cmyk: {
+          ...require("daisyui/src/theming/themes")["cmyk"],
+          ".shadow-2xl": {
+            "--tw-shadow": " 0 25px 50px -12px rgb(0 0 0/ 0.25);",
+          },
+          ".shadow-inner": {
+            "--tw-shadow": "inset 0 2px 4px 0 rgb(0 0 0/ 0.05);",
           },
         },
       },

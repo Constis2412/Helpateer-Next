@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Modal from "./Modal";
 
 const Header = () => {
