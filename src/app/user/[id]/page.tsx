@@ -13,6 +13,7 @@ interface UserProps {
 const User: React.FC<UserProps> = ({ params }) => {
   const [text, setText] = useState({ firstName: "", lastName: "", age: 0 });
   const [isLoading, setIsLoading] = useState(true);
+  const controller = new AbortController();
   useEffect(() => {
     fetch(`https://dummyjson.com/users/${params.id}/?delay=1000`)
       .then((res) => res.json())
@@ -25,6 +26,7 @@ const User: React.FC<UserProps> = ({ params }) => {
         });
         setIsLoading(false);
       });
+    return () => controller.abort();
   }, [params.id]);
 
   // if (isLoading) {
