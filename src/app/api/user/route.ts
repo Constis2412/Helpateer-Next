@@ -1,6 +1,23 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
+import * as z from "zod";
+
+//Define schrma for inputvalidation
+const userSchema = z.object({
+  firstname: z.string().min(1, "firstname is required").max(20),
+  lastname: z.string().min(1, "lastname is required").max(20),
+  age: z.number().min(1, "age is required").max(100),
+  gender: z.string().min(1, "gender is required").max(20),
+  email: z.string().min(1, "Email is required").email("Invalid email"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .min(8, "Password must have than 8 characters"),
+  disability: z.string(),
+  hilfbeduerftig: z.boolean(),
+  bio: z.string(),
+});
 
 export async function POST(req: Request) {
   try {
@@ -15,7 +32,7 @@ export async function POST(req: Request) {
       disability,
       hilfbeduerftig,
       bio,
-    } = body;
+    } = userSchema.parse(body);
 
     //check if emailt already exists
 
@@ -44,14 +61,13 @@ export async function POST(req: Request) {
       },
     });
 
+    const { password: newUserPassword, ...rest } = newUsermodel;
+
     return NextResponse.json(
-      { usermodel: newUsermodel, message: "User created successfully" },
+      { usermodel: rest, message: "User created successfully" },
       { status: 201 }
     );
   } catch (error) {
-    return NextResponse.json(
-      { usermodel: null, message: "An error occurred", error: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   }
 }
