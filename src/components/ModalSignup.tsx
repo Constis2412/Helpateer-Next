@@ -105,13 +105,15 @@ const ModalSignup = () => {
                 <h1 className="text-3xl font-bold">Join the Team!</h1>
               </div>
 
-              <div className="form-control">
+              
                 <FormField
                   control={form.control}
                   name="firstname"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
+                    <FormItem className="form-control">
+                      <label className="label">
+                      <FormLabel className="label-text">First Name</FormLabel>
+                      </label>
                       <FormControl>
                         <input
                           type="text"
@@ -125,14 +127,16 @@ const ModalSignup = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-              <div className="form-control">
+              
+             
                 <FormField
                   control={form.control}
                   name="lastname"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
+                    <FormItem className="form-control">
+                      <label className="label">
+                      <FormLabel className="label-text">Last Name</FormLabel>
+                      </label>
                       <FormControl>
                         <input
                           type="text"
@@ -146,21 +150,24 @@ const ModalSignup = () => {
                     </FormItem>
                   )}
                 />
-              </div>
+              
               <div className="flex">
-                <div className="form-control w-[50%]">
+                
                   <FormField
                     control={form.control}
                     name="age"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Age</FormLabel>
+                      <FormItem className="form-control w-[50%]">
+                         <label className="label">
+                      <FormLabel className="label-text">Age</FormLabel>
+                      </label>
                         <FormControl>
                           <input
                             type="number"
                             placeholder="age"
-                            className="input input-bordered input-primary"
+                            className="input input-bordered input-primary w-[50%]"
                             {...field}
+                            onChange={(e)=>field.onChange(Number(e.target.value))}
                             required
                           />
                         </FormControl>
@@ -168,14 +175,16 @@ const ModalSignup = () => {
                       </FormItem>
                     )}
                   />
-                </div>
-                <div className="form-control w-[50%]">
+               
+                
                   <FormField
                     control={form.control}
                     name="gender"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Gender</FormLabel>
+                      <FormItem className="form-control w-[50%]">
+                         <label className="label">
+                      <FormLabel className="label-text">Gender</FormLabel>
+                      </label>
                         <FormControl>
                           <select
                             className="select select-primary w-full max-w-xs"
@@ -194,15 +203,17 @@ const ModalSignup = () => {
                       </FormItem>
                     )}
                   />
-                </div>
+               
               </div>
-              <div className="form-control">
+             
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
+                    <FormItem className="form-control">
+                      <label className="label">
+                      <FormLabel className="label-text">Email</FormLabel>
+                      </label>
                       <FormControl>
                         <input
                           type="email"
@@ -216,14 +227,16 @@ const ModalSignup = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-              <div className="form-control">
+         
+              
                 <FormField
                   control={form.control}
                   name="password"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
+                    <FormItem className="form-control">
+                       <label className="label">
+                      <FormLabel className="label-text">Password</FormLabel>
+                      </label>
                       <FormControl>
                         <input
                           type="password"
@@ -237,14 +250,16 @@ const ModalSignup = () => {
                     </FormItem>
                   )}
                 />
-              </div>
-              <div className="form-control">
+             
+              
                 <FormField
                   control={form.control}
                   name="confirmPassword"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                    <FormItem className="form-control">
+                       <label className="label">
+                      <FormLabel className="label-text">Confirm Password</FormLabel>
+                      </label>
                       <FormControl>
                         <input
                           type="password"
@@ -258,7 +273,7 @@ const ModalSignup = () => {
                     </FormItem>
                   )}
                 />
-              </div>
+           
               <div className="form-control mt-6">
                 <button className="btn btn-primary hover:btn-secondary">
                   Sign Up
