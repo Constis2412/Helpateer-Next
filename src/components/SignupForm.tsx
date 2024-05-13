@@ -67,6 +67,9 @@ const SignUpForm = () => {
     });
 
     if (response.ok) {
+      router.push("/sign-in");
+    } else {
+      console.error("Registration failed");
     }
   };
 
