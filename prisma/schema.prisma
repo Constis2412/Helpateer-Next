@@ -32,23 +32,17 @@ model post {
 model usermodel {
   id String @id @default(cuid())
   email String @unique
-  password String @db.VarChar(20)
+  password String
   firstname String @db.VarChar(20)
   lastname String @db.VarChar(20)
   age Int 
   disability String? @db.VarChar(255)
   bio String? @db.VarChar(255)
   hilfbeduerftig Boolean @default(false)
-  gender gender @relation(fields: [genderId], references: [id])
-  genderId String
+  gender String @db.VarChar(10)
   createdposts post[] @relation("Postauthor")
   acceptedposts post[] @relation("Posthelper")
 }
 
-model gender {
-  id String @id @default(cuid())
-  name String @unique
-  user usermodel[]
-}
 
 

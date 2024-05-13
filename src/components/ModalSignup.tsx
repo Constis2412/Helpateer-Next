@@ -18,6 +18,22 @@ const ModalSignup = () => {
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
 
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.age ||
+      !formData.gender ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      setMessage("All fields must be filled out.");
+      setIsSuccess(false);
+      return false;
+    }
+
+    setMessage(null);
+
     if (!formData.firstName.match(/^[a-zA-Z]+$/)) {
       newErrors.firstName = "First name should only contain letters.";
     }
@@ -62,6 +78,11 @@ const ModalSignup = () => {
     if (res.ok) {
       setMessage("Registration successful!");
       setIsSuccess(true);
+      // Close the modal
+      const modal = document.getElementById("my_modal") as HTMLDialogElement;
+      if (modal) {
+        modal.close();
+      }
     } else {
       const errorData = await res.json();
       setMessage(`Registration failed: ${errorData.error}`);
@@ -87,7 +108,7 @@ const ModalSignup = () => {
         Start Helping
       </button>
       <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box overflow-hidden">
+        <div className="modal-box">
           <form className="card-body py-1" onSubmit={handleSubmit}>
             <div className="form-control">
               <h1 className="text-3xl font-bold">Join the Team!</h1>
@@ -112,7 +133,6 @@ const ModalSignup = () => {
                 className="input input-bordered input-primary"
                 value={formData.firstName}
                 onChange={handleChange}
-                required
               />
               {errors.firstName && (
                 <p className="text-red-500">{errors.firstName}</p>
@@ -129,7 +149,6 @@ const ModalSignup = () => {
                 className="input input-bordered input-primary"
                 value={formData.lastName}
                 onChange={handleChange}
-                required
               />
               {errors.lastName && (
                 <p className="text-red-500">{errors.lastName}</p>
@@ -144,10 +163,9 @@ const ModalSignup = () => {
                   type="number"
                   name="age"
                   placeholder="Age"
-                  className="input input-bordered input-primary w-[50%]"
+                  className="input input-bordered input-primary"
                   value={formData.age}
                   onChange={handleChange}
-                  required
                 />
                 {errors.age && <p className="text-red-500">{errors.age}</p>}
               </div>
@@ -160,7 +178,6 @@ const ModalSignup = () => {
                   className="select select-primary w-full max-w-xs"
                   value={formData.gender}
                   onChange={handleChange}
-                  required
                 >
                   <option disabled value="">
                     Gender
@@ -182,7 +199,6 @@ const ModalSignup = () => {
                 className="input input-bordered input-primary"
                 value={formData.email}
                 onChange={handleChange}
-                required
               />
               {errors.email && <p className="text-red-500">{errors.email}</p>}
             </div>
@@ -197,8 +213,10 @@ const ModalSignup = () => {
                 className="input input-bordered input-primary"
                 value={formData.password}
                 onChange={handleChange}
-                required
               />
+              {errors.password && (
+                <p className="text-red-500">{errors.password}</p>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -211,7 +229,6 @@ const ModalSignup = () => {
                 className="input input-bordered input-primary"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                required
               />
               {errors.confirmPassword && (
                 <p className="text-red-500">{errors.confirmPassword}</p>
@@ -236,132 +253,3 @@ const ModalSignup = () => {
 };
 
 export default ModalSignup;
-
-/*
-"use client";
-import React from "react";
-
-const ModalSignup = () => {
-  const useEffect = () => {
-    const modal = document.getElementById("my_modal");
-    if (modal instanceof HTMLDialogElement) {
-      modal.showModal();
-    } else {
-      console.error(
-        "The element #my_modal_2 does not exist or is not a dialog element."
-      );
-    }
-  };
-
-  return (
-    <div>
-      <button
-        className="btn  border-none bg-primary hover:bg-secondary"
-        onClick={useEffect}
-      >
-        Start Helping
-      </button>
-      <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box overflow-hidden">
-          <form className="card-body py-1">
-            <div className="form-control">
-              <h1 className="text-3xl font-bold">Join the Team!</h1>
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">First Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="first name"
-                className="input input-bordered input-primary"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Last Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="input input-bordered input-primary"
-                required
-              />
-            </div>
-            <div className="flex">
-              <div className="form-control w-[50%]">
-                <label className="label">
-                  <span className="label-text">Age</span>
-                </label>
-                <input
-                  type="number"
-                  placeholder="age"
-                  className="input input-bordered input-primary w-[50%]"
-                  required
-                />
-              </div>
-              <div className="form-control w-[50%]">
-                <label className="label">
-                  <span className="label-text">Gender</span>
-                </label>
-                <select className="select select-primary w-full max-w-xs">
-                  <option disabled selected>
-                    gender
-                  </option>
-                  <option>Man</option>
-                  <option>Woman</option>
-                  <option>Diverse</option>
-                </select>
-              </div>
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered input-primary"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered input-primary"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered input-primary"
-                required
-              />
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary hover:btn-secondary">
-                Sign Up
-              </button>
-            </div>
-          </form>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
-    </div>
-  );
-};
-
-export default ModalSignup;
-*/
