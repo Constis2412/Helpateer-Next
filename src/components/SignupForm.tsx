@@ -8,7 +8,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "components/form.tsx";
+} from "@/components/form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -79,7 +79,7 @@ const SignUpForm = () => {
         <div className="space-y-2">
           <FormField
             control={form.control}
-            name="username"
+            name="firstname"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Username</FormLabel>
