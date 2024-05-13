@@ -24,8 +24,8 @@ model post {
   dueTime DateTime
   author usermodel @relation(fields: [authorId], references: [id], name: "Postauthor")
   authorId String
-  helper usermodel @relation(fields: [helperId], references: [id], name: "Posthelper")
-  helperId String
+  helper usermodel? @relation(fields: [helperId], references: [id], name: "Posthelper")
+  helperId String?
 }
 
 

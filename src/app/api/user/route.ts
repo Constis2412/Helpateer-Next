@@ -5,7 +5,17 @@ import { hash } from "bcrypt";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { firstname, lastname, age, gender, email, password } = body;
+    const {
+      firstname,
+      lastname,
+      age,
+      gender,
+      email,
+      password,
+      disability,
+      hilfbeduerftig,
+      bio,
+    } = body;
 
     //check if emailt already exists
 
@@ -28,6 +38,9 @@ export async function POST(req: Request) {
         gender,
         email,
         password: hashedPassword,
+        disability,
+        hilfbeduerftig,
+        bio,
       },
     });
 
