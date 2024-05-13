@@ -11,6 +11,8 @@ import {
 } from "@/components/form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/input";
+import { Button } from "@/components/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -51,14 +53,10 @@ const ModalSignup = () => {
     },
   });
 
-  const useEffect = () => {
+  const showModal = () => {
     const modal = document.getElementById("my_modal");
     if (modal instanceof HTMLDialogElement) {
       modal.showModal();
-    } else {
-      console.error(
-        "The element #my_modal does not exist or is not a dialog element."
-      );
     }
   };
 
@@ -79,7 +77,7 @@ const ModalSignup = () => {
     });
 
     if (response.ok) {
-      router.push("/sign-in");
+      router.push("/");
     } else {
       console.error("Registration failed");
     }
@@ -88,8 +86,8 @@ const ModalSignup = () => {
   return (
     <div>
       <button
-        className="btn  border-none bg-primary hover:bg-secondary"
-        onClick={useEffect}
+        className="btn border-none bg-primary hover:bg-secondary"
+        onClick={showModal}
       >
         Start Helping
       </button>
@@ -105,177 +103,171 @@ const ModalSignup = () => {
                 <h1 className="text-3xl font-bold">Join the Team!</h1>
               </div>
 
-              
-                <FormField
-                  control={form.control}
-                  name="firstname"
-                  render={({ field }) => (
-                    <FormItem className="form-control">
-                      <label className="label">
+              <FormField
+                control={form.control}
+                name="firstname"
+                render={({ field }) => (
+                  <FormItem className="form-control">
+                    <label className="label">
                       <FormLabel className="label-text">First Name</FormLabel>
-                      </label>
-                      <FormControl>
-                        <input
-                          type="text"
-                          placeholder="first name"
-                          className="input input-bordered input-primary"
-                          {...field}
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              
-             
-                <FormField
-                  control={form.control}
-                  name="lastname"
-                  render={({ field }) => (
-                    <FormItem className="form-control">
-                      <label className="label">
+                    </label>
+                    <FormControl>
+                      <input
+                        placeholder="first name"
+                        className="input input-bordered input-primary"
+                        {...field}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="lastname"
+                render={({ field }) => (
+                  <FormItem className="form-control">
+                    <label className="label">
                       <FormLabel className="label-text">Last Name</FormLabel>
-                      </label>
-                      <FormControl>
-                        <input
-                          type="text"
-                          placeholder="last name"
-                          className="input input-bordered input-primary"
-                          {...field}
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              
+                    </label>
+                    <FormControl>
+                      <input
+                        placeholder="last name"
+                        className="input input-bordered input-primary"
+                        {...field}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <div className="flex">
-                
-                  <FormField
-                    control={form.control}
-                    name="age"
-                    render={({ field }) => (
-                      <FormItem className="form-control w-[50%]">
-                         <label className="label">
-                      <FormLabel className="label-text">Age</FormLabel>
-                      </label>
-                        <FormControl>
-                          <input
-                            type="number"
-                            placeholder="age"
-                            className="input input-bordered input-primary w-[50%]"
-                            {...field}
-                            onChange={(e)=>field.onChange(Number(e.target.value))}
-                            required
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-               
-                
-                  <FormField
-                    control={form.control}
-                    name="gender"
-                    render={({ field }) => (
-                      <FormItem className="form-control w-[50%]">
-                         <label className="label">
-                      <FormLabel className="label-text">Gender</FormLabel>
-                      </label>
-                        <FormControl>
-                          <select
-                            className="select select-primary w-full max-w-xs"
-                            {...field}
-                            required
-                          >
-                            <option value="" disabled>
-                              Select gender
-                            </option>
-                            <option value="Man">Man</option>
-                            <option value="Woman">Woman</option>
-                            <option value="Diverse">Diverse</option>
-                          </select>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-               
-              </div>
-             
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="age"
                   render={({ field }) => (
-                    <FormItem className="form-control">
+                    <FormItem className="form-control w-[50%]">
                       <label className="label">
+                        <FormLabel className="label-text">Age</FormLabel>
+                      </label>
+                      <FormControl>
+                        <input
+                          type="number"
+                          placeholder="age"
+                          className="input input-bordered input-primary w-[50%]"
+                          {...field}
+                          value={field.value} // Ensure the field value is a number
+                          onChange={(e) =>
+                            field.onChange(parseInt(e.target.value, 10))
+                          } // Convert the input value to a number
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="gender"
+                  render={({ field }) => (
+                    <FormItem className="form-control w-[50%]">
+                      <label className="label">
+                        <FormLabel className="label-text">Gender</FormLabel>
+                      </label>
+                      <FormControl>
+                        <select
+                          className="select select-primary w-full max-w-xs"
+                          {...field}
+                          required
+                        >
+                          <option value="" disabled>
+                            Select gender
+                          </option>
+                          <option value="Man">Man</option>
+                          <option value="Woman">Woman</option>
+                          <option value="Diverse">Diverse</option>
+                        </select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="form-control">
+                    <label className="label">
                       <FormLabel className="label-text">Email</FormLabel>
-                      </label>
-                      <FormControl>
-                        <input
-                          type="email"
-                          placeholder="email"
-                          className="input input-bordered input-primary"
-                          {...field}
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-         
-              
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem className="form-control">
-                       <label className="label">
+                    </label>
+                    <FormControl>
+                      <input
+                        placeholder="email"
+                        className="input input-bordered input-primary"
+                        {...field}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem className="form-control">
+                    <label className="label">
                       <FormLabel className="label-text">Password</FormLabel>
-                      </label>
-                      <FormControl>
-                        <input
-                          type="password"
-                          placeholder="password"
-                          className="input input-bordered input-primary"
-                          {...field}
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-             
-              
-                <FormField
-                  control={form.control}
-                  name="confirmPassword"
-                  render={({ field }) => (
-                    <FormItem className="form-control">
-                       <label className="label">
-                      <FormLabel className="label-text">Confirm Password</FormLabel>
-                      </label>
-                      <FormControl>
-                        <input
-                          type="password"
-                          placeholder="confirm password"
-                          className="input input-bordered input-primary"
-                          {...field}
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-           
+                    </label>
+                    <FormControl>
+                      <input
+                        placeholder="password"
+                        className="input input-bordered input-primary"
+                        {...field}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem className="form-control">
+                    <label className="label">
+                      <FormLabel className="label-text">
+                        Confirm Password
+                      </FormLabel>
+                    </label>
+                    <FormControl>
+                      <input
+                        placeholder="confirm password"
+                        className="input input-bordered input-primary"
+                        {...field}
+                        required
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <div className="form-control mt-6">
-                <button className="btn btn-primary hover:btn-secondary">
+                <button
+                  className="btn btn-primary hover:btn-secondary"
+                  type="submit"
+                >
                   Sign Up
                 </button>
               </div>
