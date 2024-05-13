@@ -5,18 +5,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
 
-const FormSchema = z.object({
-  firstname: z.string().min(1, "firstname is required").max(20),
-  lastname: z.string().min(1, "lastname is required").max(20),
-  age: z.number().min(1, "age is required").max(100),
-  gender: z.string().min(1, "gender is required").max(20),
-  email: z.string().min(1, "Email is required").email("Invalid email"),
-  password: z.string().min(1, "Password is required").min(8, "Password must have more than 8 characters"),
-  confirmPassword: z.string().min(1, "Password confirmation is required"),
-}).refine((data) => data.password === data.confirmPassword, {
-  path: ["confirmPassword"],
-  message: "Passwords do not match",
-});
+const FormSchema = z
+  .object({
+    firstname: z.string().min(1, "firstname is required").max(20),
+    lastname: z.string().min(1, "lastname is required").max(20),
+    age: z.number().min(1, "age is required").max(100),
+    gender: z.string().min(1, "gender is required").max(20),
+    email: z.string().min(1, "Email is required").email("Invalid email"),
+    password: z
+      .string()
+      .min(1, "Password is required")
+      .min(8, "Password must have more than 8 characters"),
+    confirmPassword: z.string().min(1, "Password confirmation is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
 
 const ModalSignup = () => {
   const router = useRouter();
@@ -66,13 +71,19 @@ const ModalSignup = () => {
 
   return (
     <div>
-      <button className="btn border-none bg-primary hover:bg-secondary" onClick={showModal}>
+      <button
+        className="btn border-none bg-primary hover:bg-secondary"
+        onClick={showModal}
+      >
         Start Helping
       </button>
 
       <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <form onSubmit={form.handleSubmit(onSubmit)} className="card-body py-1">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="card-body py-1"
+          >
             <div className="form-control">
               <h1 className="text-3xl font-bold">Join the Team!</h1>
             </div>
@@ -158,7 +169,10 @@ const ModalSignup = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button className="btn btn-primary hover:btn-secondary" type="submit">
+              <button
+                className="btn btn-primary hover:btn-secondary"
+                type="submit"
+              >
                 Sign Up
               </button>
             </div>

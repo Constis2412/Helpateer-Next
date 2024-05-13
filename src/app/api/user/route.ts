@@ -14,25 +14,13 @@ const userSchema = z.object({
     .string()
     .min(1, "Password is required")
     .min(8, "Password must have than 8 characters"),
-  disability: z.string(),
-  hilfbeduerftig: z.boolean(),
-  bio: z.string(),
 });
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const {
-      firstname,
-      lastname,
-      age,
-      gender,
-      email,
-      password,
-      disability,
-      hilfbeduerftig,
-      bio,
-    } = userSchema.parse(body);
+    const { firstname, lastname, age, gender, email, password } =
+      userSchema.parse(body);
 
     //check if emailt already exists
 
@@ -55,9 +43,6 @@ export async function POST(req: Request) {
         gender,
         email,
         password: hashedPassword,
-        disability,
-        hilfbeduerftig,
-        bio,
       },
     });
 
