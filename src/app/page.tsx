@@ -1,42 +1,45 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="h-svh overflow-hidden">
+    <main className="min:h-svh overflow-hidden">
       {" "}
       <Header />
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, veniam
-      reprehenderit? Provident iste quibusdam doloremque? Repellendus
-      reprehenderit voluptatem dolorem expedita natus perspiciatis explicabo
-      labore ratione iusto laboriosam, exercitationem eveniet ut animi. Odit
-      tempora suscipit enim sunt, architecto sint ut maxime iure adipisci
-      necessitatibus laboriosam saepe dicta earum facilis quos dignissimos? Quia
-      modi eum error placeat ullam temporibus officia eveniet ipsum nam nihil,
-      maxime id iste ipsam veritatis aliquam repudiandae similique consectetur
-      soluta eaque voluptates? Accusamus tempora consequatur a sint excepturi!
-      Esse voluptate vero explicabo magnam, asperiores, sapiente impedit ab eos,
-      totam nobis cupiditate quos error ratione in cum beatae quas distinctio
-      exercitationem tenetur. Deserunt officia possimus porro vero ipsa dolor
-      nihil quam earum harum aut, beatae non provident eos quis deleniti rem
-      mollitia nisi magnam minima unde iste, dignissimos sapiente! Qui ipsa
-      itaque eaque suscipit repellendus velit ut? Sunt eligendi numquam,
-      consectetur quisquam quasi enim deserunt ducimus ipsam at id incidunt eius
-      optio est quod alias quidem officiis illum nobis vitae asperiores
-      cupiditate, ipsa velit ipsum. Nihil nobis, facere repudiandae veritatis
-      quia vel temporibus cumque natus itaque saepe ratione. Consectetur,
-      aperiam rerum. Ullam perferendis perspiciatis porro deleniti, nulla dolor
-      autem corporis pariatur adipisci animi unde nesciunt exercitationem atque
-      ea commodi. Officiis, vel. Saepe aliquam, vel non facilis assumenda
-      deserunt fugit dignissimos nostrum in officiis pariatur quod, sapiente
-      magni. Neque nulla inventore facilis velit mollitia unde sapiente
-      blanditiis laborum saepe. Unde labore reiciendis id ducimus itaque impedit
-      consectetur ipsa. Error, dicta. Ea alias assumenda nihil architecto
-      similique esse, est nam autem voluptatibus mollitia, perferendis rem
-      dolore harum reprehenderit vel ipsam suscipit. Aut illum deserunt maiores
-      possimus cumque cupiditate sit. Obcaecati similique dignissimos, cumque
-      nostrum, iusto quod quasi pariatur facere tempore, maxime illum ut
-      doloribus minus! Voluptates minima eveniet sunt tenetur officiis, hic
-      officia ipsum eius, voluptatem iure debitis dicta accusantium? Optio.
+      <div className="flex flex-col border-opacity-50 mx-10 mt-5 mb-5">
+        <div className="flex">
+          <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+            About Our Team
+          </div>
+          <div className="divider divider-horizontal divider-info"> </div>
+          <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+            About Our Projekt
+          </div>
+        </div>
+        <div className="divider divider-info"></div>
+        <div className="grid h-20 card bg-base-300 rounded-box place-items-center">
+          Lorem ipsum dolor sit amet.
+        </div>
+        <div className="divider divider-info"></div>
+        <div className="grid card bg-base-300 rounded-box place-items-center">
+          <p className="line-clamp-2 mx-4 my-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            incidunt commodi dignissimos quae possimus officiis, expedita
+            quisquam ut quia animi temporibus itaque placeat voluptatibus fugit
+            vero aut, eligendi saepe facilis adipisci molestiae inventore
+            asperiores magni consequatur voluptates! Doloribus suscipit repellat
+            reprehenderit eos? Nam maxime, minus voluptatibus expedita quos
+            eveniet facere! Pariatur consectetur, illum aspernatur repellat quam
+            consequuntur quisquam suscipit unde magnam reprehenderit voluptatem
+            nemo distinctio nostrum voluptates, dolor, quasi optio laudantium
+            nam quia dolores tempore error accusamus quo molestiae. Aut, enim,
+            velit minus delectus esse iste, aliquam magnam in ipsam deleniti
+            cumque corporis? Adipisci, ipsam rem? Incidunt voluptatibus eius
+            cum.
+          </p>
+        </div>
+      </div>
+      <Footer />
     </main>
   );
 }
