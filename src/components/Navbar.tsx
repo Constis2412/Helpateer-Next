@@ -18,7 +18,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex-none">
-          <Link href="/user/1" className="">
+          <Link href="/user" className="">
             <div className="avatar w-12 h-12">
               <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />

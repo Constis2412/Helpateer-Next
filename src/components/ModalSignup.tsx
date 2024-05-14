@@ -38,13 +38,6 @@ const ModalSignup = () => {
     },
   });
 
-  const showModal = () => {
-    const modal = document.getElementById("my_modal");
-    if (modal instanceof HTMLDialogElement) {
-      modal.showModal();
-    }
-  };
-
   const onSubmit = async (values) => {
     console.log("Form submitted:", values);
     const response = await fetch("/api/user", {
@@ -63,6 +56,10 @@ const ModalSignup = () => {
     });
 
     if (response.ok) {
+      const modal = document.getElementById("my_modal");
+      if (modal instanceof HTMLDialogElement) {
+        modal.close();
+      }
       router.push("/");
     } else {
       console.error("Registration failed");
@@ -71,13 +68,6 @@ const ModalSignup = () => {
 
   return (
     <div>
-      <button
-        className="btn border-none bg-primary hover:bg-secondary"
-        onClick={showModal}
-      >
-        Start Helping
-      </button>
-
       <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <form
