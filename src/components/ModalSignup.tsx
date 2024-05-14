@@ -63,6 +63,10 @@ const ModalSignup = () => {
     });
 
     if (response.ok) {
+      const modal = document.getElementById("my_modal");
+      if (modal instanceof HTMLDialogElement) {
+        modal.close(); // Schließt das Modal
+      }
       router.push("/");
     } else {
       console.error("Registration failed");
