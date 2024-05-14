@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model post {
   id String @id @default(cuid())
   title String @db.VarChar(255)
   content String @db.VarChar(255)
@@ -22,33 +22,27 @@ model Post {
   updatedAt DateTime @updatedAt
   dueDate DateTime 
   dueTime DateTime
-  author User @relation(fields: [authorId], references: [id], name: "Postauthor")
+  author usermodel @relation(fields: [authorId], references: [id], name: "Postauthor")
   authorId String
-  helper User @relation(fields: [helperId], references: [id], name: "Posthelper")
-  helperId String
+  helper usermodel? @relation(fields: [helperId], references: [id], name: "Posthelper")
+  helperId String?
 }
 
 
-model User {
+model usermodel {
   id String @id @default(cuid())
   email String @unique
-  password String @db.VarChar(20)
+  password String
   firstname String @db.VarChar(20)
   lastname String @db.VarChar(20)
   age Int 
   disability String? @db.VarChar(255)
   bio String? @db.VarChar(255)
   hilfbeduerftig Boolean @default(false)
-  sex Sex @relation(fields: [sexId], references: [id])
-  sexId String @unique
-  createdposts Post[] @relation("Postauthor")
-  acceptedposts Post[] @relation("Posthelper")
+  gender String @db.VarChar(10)
+  createdposts post[] @relation("Postauthor")
+  acceptedposts post[] @relation("Posthelper")
 }
 
-model Sex {
-  id String @id @default(cuid())
-  name String @unique
-  user User?
-}
 
 

@@ -1,115 +1,172 @@
 "use client";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useRouter } from "next/navigation";
+
+const FormSchema = z
+  .object({
+    firstname: z.string().min(1, "firstname is required").max(20),
+    lastname: z.string().min(1, "lastname is required").max(20),
+    age: z.number().min(1, "age is required").max(100),
+    gender: z.string().min(1, "gender is required").max(20),
+    email: z.string().min(1, "Email is required").email("Invalid email"),
+    password: z
+      .string()
+      .min(1, "Password is required")
+      .min(8, "Password must have more than 8 characters"),
+    confirmPassword: z.string().min(1, "Password confirmation is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
 
 const ModalSignup = () => {
-  const useEffect = () => {
-    const modal = document.getElementById("my_modal");
-    if (modal instanceof HTMLDialogElement) {
-      modal.showModal();
+  const router = useRouter();
+  const form = useForm({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      firstname: "",
+      lastname: "",
+      age: 0,
+      gender: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (values) => {
+    console.log("Form submitted:", values);
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname: values.firstname,
+        lastname: values.lastname,
+        age: values.age,
+        gender: values.gender,
+        email: values.email,
+        password: values.password,
+      }),
+    });
+
+    if (response.ok) {
+      const modal = document.getElementById("my_modal");
+      const modal2 = document.getElementById("my_modal_2");
+      if (
+        modal instanceof HTMLDialogElement &&
+        modal2 instanceof HTMLDialogElement
+      ) {
+        modal.close();
+        modal2.showModal(); // Schließt das Modal
+      }
     } else {
-      console.error(
-        "The element #my_modal_2 does not exist or is not a dialog element."
-      );
+      console.error("Registration failed");
     }
   };
 
   return (
     <div>
-      <button
-        className="btn  border-none bg-primary hover:bg-secondary"
-        onClick={useEffect}
-      >
-        Start Helping
-      </button>
       <dialog id="my_modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box overflow-hidden">
-          <form className="card-body py-1">
+        <div className="modal-box">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="card-body py-1"
+          >
             <div className="form-control">
               <h1 className="text-3xl font-bold">Join the Team!</h1>
             </div>
+
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">First Name</span>
-              </label>
+              <label className="label">First Name</label>
               <input
-                type="text"
                 placeholder="first name"
                 className="input input-bordered input-primary"
+                {...form.register("firstname")}
                 required
               />
             </div>
+
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">Last Name</span>
-              </label>
+              <label className="label">Last Name</label>
               <input
-                type="text"
-                placeholder="Last Name"
+                placeholder="last name"
                 className="input input-bordered input-primary"
+                {...form.register("lastname")}
                 required
               />
             </div>
+
             <div className="flex">
               <div className="form-control w-[50%]">
-                <label className="label">
-                  <span className="label-text">Age</span>
-                </label>
+                <label className="label">Age</label>
                 <input
                   type="number"
                   placeholder="age"
-                  className="input input-bordered input-primary w-[50%]"
+                  className="input input-bordered input-primary"
+                  {...form.register("age", { valueAsNumber: true })}
                   required
                 />
               </div>
               <div className="form-control w-[50%]">
-                <label className="label">
-                  <span className="label-text">Gender</span>
-                </label>
-                <select className="select select-primary w-full max-w-xs">
-                  <option disabled selected>
-                    gender
+                <label className="label">Gender</label>
+                <select
+                  className="select select-primary w-full max-w-xs"
+                  {...form.register("gender")}
+                  required
+                >
+                  <option value="" disabled>
+                    Select gender
                   </option>
-                  <option>Man</option>
-                  <option>Woman</option>
-                  <option>Diverse</option>
+                  <option value="Man">Man</option>
+                  <option value="Woman">Woman</option>
+                  <option value="Diverse">Diverse</option>
                 </select>
               </div>
             </div>
+
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
+              <label className="label">Email</label>
               <input
-                type="email"
                 placeholder="email"
                 className="input input-bordered input-primary"
+                {...form.register("email")}
                 required
               />
             </div>
+
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
+              <label className="label">Password</label>
               <input
                 type="password"
                 placeholder="password"
                 className="input input-bordered input-primary"
+                {...form.register("password")}
                 required
               />
             </div>
+
             <div className="form-control">
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
+              <label className="label">Confirm Password</label>
               <input
                 type="password"
-                placeholder="password"
+                placeholder="confirm password"
                 className="input input-bordered input-primary"
+                {...form.register("confirmPassword")}
                 required
               />
             </div>
+
             <div className="form-control mt-6">
-              <button className="btn btn-primary hover:btn-secondary">
+              <button
+                className="btn btn-primary hover:btn-secondary"
+                type="submit"
+              >
                 Sign Up
               </button>
             </div>

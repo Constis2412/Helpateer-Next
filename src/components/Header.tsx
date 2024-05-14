@@ -1,5 +1,7 @@
+import LoginButton from "./LoginButton";
 import ModalLogin from "./ModalLogin";
 import ModalSignup from "./ModalSignup";
+import SignUpButton from "./SignUpButton";
 
 const Header = () => {
   return (
@@ -18,8 +20,14 @@ const Header = () => {
           </p>
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <div className="grid grid-cols-2 grid-rows-1">
-            <ModalLogin />
-            <ModalSignup />
+            <LoginButton />
+            <div className=" fixed">
+              <ModalLogin />
+            </div>
+            <SignUpButton />
+            <div className="fixed">
+              <ModalSignup />
+            </div>
           </div>
         </div>
       </div>
