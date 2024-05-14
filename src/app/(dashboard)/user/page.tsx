@@ -1,11 +1,11 @@
 import Avatar from "@/components/Avatar";
 import BioStats from "@/components/BioStats";
+import SignOutButton from "@/components/SignOutButton";
 import UserInfo from "@/components/UserInfo";
 import { authOptions } from "@/lib/auth";
-import { PenLine } from "lucide-react";
+
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
 
 const User = async () => {
   // const [isLoading, setIsLoading] = useState(true);
@@ -16,15 +16,15 @@ const User = async () => {
   // if (isLoading) {
   //   return <div>Is Loading...</div>;
   // }
-
-  return (
-    <div className="container pt-16 px-8">
-      <div className="grid grid-cols-3 grid-rows-2 w-screen-50 bg-base-100 overflow-auto px-8 shadow-2xl rounded-3xl">
-        <Avatar />
-        <UserInfo data={session?.user} />
-        <BioStats />
-      </div>
-      {/* {isLoading ? (
+  if (session?.user) {
+    return (
+      <div className="container pt-16 px-8">
+        <div className="grid grid-cols-3 grid-rows-2 w-screen-50 bg-base-100 overflow-auto px-8 shadow-2xl rounded-3xl">
+          <Avatar />
+          <UserInfo data={session?.user} />
+          <BioStats />
+        </div>
+        {/* {isLoading ? (
         <div className="grid grid-cols-3 grid-rows-2 w-screen-50 bg-base-100 overflow-auto px-8 shadow-2xl rounded-3xl">
           <div className="justify-center ml-3 flex flex-col pt-8">
             <div className="skeleton w-24 h-24 rounded-full shrink-0"></div>
@@ -55,6 +55,18 @@ const User = async () => {
           
         </div>
       )} */}
+        <div className=" text-end">
+          <SignOutButton />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <p>sign in to see this</p>
+      <Link href="/" className="btn btn-primary hover:btn-secondary">
+        Back home{" "}
+      </Link>
     </div>
   );
 };

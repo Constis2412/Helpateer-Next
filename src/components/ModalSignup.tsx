@@ -57,10 +57,14 @@ const ModalSignup = () => {
 
     if (response.ok) {
       const modal = document.getElementById("my_modal");
-      if (modal instanceof HTMLDialogElement) {
-        modal.close(); // Schließt das Modal
+      const modal2 = document.getElementById("my_modal_2");
+      if (
+        modal instanceof HTMLDialogElement &&
+        modal2 instanceof HTMLDialogElement
+      ) {
+        modal.close();
+        modal2.showModal(); // Schließt das Modal
       }
-      router.push("/");
     } else {
       console.error("Registration failed");
     }
