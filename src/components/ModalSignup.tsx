@@ -58,7 +58,7 @@ const ModalSignup = () => {
     if (response.ok) {
       const modal = document.getElementById("my_modal");
       if (modal instanceof HTMLDialogElement) {
-        modal.close();
+        modal.close(); // Schließt das Modal
       }
       router.push("/");
     } else {
