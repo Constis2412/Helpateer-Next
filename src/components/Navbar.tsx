@@ -4,7 +4,7 @@ import DarkLightMode from "./DarkLightMode";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-primary">
+    <div className="navbar bg-primary sticky top-0 z-50">
       <div className="container gap-2">
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost">
