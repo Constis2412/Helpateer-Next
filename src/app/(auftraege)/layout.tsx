@@ -1,3 +1,7 @@
+"use client";
+
+import { SessionProvider } from "next-auth/react";
+
 import SideBar from "@/components/SideBar";
 
 export default function auftraegeLayout({
@@ -7,8 +11,10 @@ export default function auftraegeLayout({
 }>) {
   return (
     <div className="grid grid-cols-3 gap-4 h-screen">
-      <SideBar />
-      {children}
+      <SessionProvider>
+        <SideBar />
+        {children}
+      </SessionProvider>
     </div>
   );
 }

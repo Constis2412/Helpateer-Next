@@ -1,50 +1,52 @@
+"use client";
 import Link from "next/link";
 import React from "react";
-import { ListChecks } from "lucide-react";
-import { MapPin } from "lucide-react";
-import { List } from "lucide-react";
-import { CalendarDays } from "lucide-react";
-import { CircleHelp } from "lucide-react";
-import { Plus } from "lucide-react";
-import { LogOut } from "lucide-react";
+import { usePathname } from "next/navigation";
+import {
+  ListChecks,
+  MapPin,
+  List,
+  CalendarDays,
+  CircleHelp,
+  Plus,
+} from "lucide-react";
+
+const links = [
+  { href: "/auftraege", icon: <Plus />, label: "Auftrag erstellen" },
+  { href: "/map", icon: <MapPin />, label: "Karte" },
+  { href: "/Jobs", icon: <List />, label: "verfügbare Jobs" },
+  { href: "/doneJobs", icon: <ListChecks />, label: "abgeschlossene Jobs" },
+  { href: "/HelpCenter", icon: <CircleHelp />, label: "Hilfecenter" },
+  { href: "/calendar", icon: <CalendarDays />, label: "Kalender" },
+];
+
+const NavLink = ({ href, icon, label, active }) => (
+  <Link
+    href={href}
+    className={`btn ${
+      active ? "bg-primary hover:bg-accent" : "hover:bg-primary"
+    }`}
+  >
+    {icon}
+    {label}
+  </Link>
+);
 
 const SideBar = () => {
+  const pathname = usePathname();
+
   return (
-    <div>
-      <div className="col-span-1 bg-primary p-4 h-full">
-        <Link href="map" className="btn">
-          <MapPin />
-          Karte
-        </Link>
-        <p className="break-normal"></p>
-        <Link href="auftraege" className="btn">
-          <Plus />
-          Auftrag erstellen
-        </Link>
-        <p className="break-normal"></p>
-        <Link href="Jobs" className="btn">
-          <List />
-          verfügbare Jobs
-        </Link>
-        <p className="break-normal"></p>
-        <Link href="doneJobs" className="btn">
-          <ListChecks />
-          abgeschlossene Jobs
-        </Link>
-        <p className="break-normal"></p>
-        <Link href="HelpCenter" className="btn">
-          <CircleHelp />
-          Hilfecenter
-        </Link>
-        <p className="break-normal"></p>
-        <Link href="calendar" className="btn">
-          <CalendarDays />
-          Kalender
-        </Link>
-        <p className="break-normal"></p>
-        <Link href="logOut" className="btn">
-          Ausloggen
-        </Link>
+    <div className="bg-primary">
+      <div className="flex flex-col p-4 gap-2">
+        {links.map((link) => (
+          <NavLink
+            key={link.href}
+            href={link.href}
+            icon={link.icon}
+            label={link.label}
+            active={pathname === link.href}
+          />
+        ))}
       </div>
     </div>
   );

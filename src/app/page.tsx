@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <div className="divider divider-info"></div>
         <div className="grid card bg-base-300 rounded-box place-items-center">
-          <p className="line-clamp-2 mx-4 my-4">
+          <p className="mx-4 my-4 line-clamp-2 hover:line-clamp-none">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
             incidunt commodi dignissimos quae possimus officiis, expedita
             quisquam ut quia animi temporibus itaque placeat voluptatibus fugit

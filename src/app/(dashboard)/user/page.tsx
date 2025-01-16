@@ -62,11 +62,13 @@ const User = async () => {
     );
   }
   return (
-    <div>
-      <p>sign in to see this</p>
-      <Link href="/" className="btn btn-primary hover:btn-secondary">
-        Back home{" "}
-      </Link>
+    <div className="flex h-64 justify-center items-center text-center">
+      <div>
+        <h2 className=" text-xl">Sign in to see this</h2>
+        <Link href="/" className="btn btn-primary hover:btn-secondary">
+          Back home
+        </Link>
+      </div>
     </div>
   );
 };

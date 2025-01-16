@@ -33,7 +33,10 @@ const ModalLogin = () => {
     if (signInData?.error) {
       console.log(signInData.error);
     } else {
-      router.push("/user");
+      setTimeout(() => {
+        router.push("/user");
+        router.refresh();
+      }, 50);
     }
   };
 

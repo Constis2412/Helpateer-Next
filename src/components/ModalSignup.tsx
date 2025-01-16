@@ -5,12 +5,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useRouter } from "next/navigation";
 
+const namePattern = /^[a-zA-Z]+$/;
+
 const FormSchema = z
   .object({
-    firstname: z.string().min(1, "firstname is required").max(20),
-    lastname: z.string().min(1, "lastname is required").max(20),
-    age: z.number().min(1, "age is required").max(100),
-    gender: z.string().min(1, "gender is required").max(20),
+    firstname: z
+      .string()
+      .min(1, "Firstname is required")
+      .max(20)
+      .regex(namePattern, "Firstname should not contain numbers"),
+    lastname: z
+      .string()
+      .min(1, "Lastname is required")
+      .max(20)
+      .regex(namePattern, "Lastname should not contain numbers"),
+    age: z.number().min(1, "Age is required").max(100),
+    gender: z.string().min(1, "Gender is required").max(20),
     email: z.string().min(1, "Email is required").email("Invalid email"),
     password: z
       .string()
@@ -90,6 +100,11 @@ const ModalSignup = () => {
                 {...form.register("firstname")}
                 required
               />
+              {form.formState.errors.firstname && (
+                <p className="text-red-500">
+                  {form.formState.errors.firstname.message}
+                </p>
+              )}
             </div>
 
             <div className="form-control">
@@ -100,6 +115,11 @@ const ModalSignup = () => {
                 {...form.register("lastname")}
                 required
               />
+              {form.formState.errors.lastname && (
+                <p className="text-red-500">
+                  {form.formState.errors.lastname.message}
+                </p>
+              )}
             </div>
 
             <div className="flex">
@@ -112,6 +132,11 @@ const ModalSignup = () => {
                   {...form.register("age", { valueAsNumber: true })}
                   required
                 />
+                {form.formState.errors.age && (
+                  <p className="text-red-500">
+                    {form.formState.errors.age.message}
+                  </p>
+                )}
               </div>
               <div className="form-control w-[50%]">
                 <label className="label">Gender</label>
@@ -127,6 +152,11 @@ const ModalSignup = () => {
                   <option value="Woman">Woman</option>
                   <option value="Diverse">Diverse</option>
                 </select>
+                {form.formState.errors.gender && (
+                  <p className="text-red-500">
+                    {form.formState.errors.gender.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -138,6 +168,11 @@ const ModalSignup = () => {
                 {...form.register("email")}
                 required
               />
+              {form.formState.errors.email && (
+                <p className="text-red-500">
+                  {form.formState.errors.email.message}
+                </p>
+              )}
             </div>
 
             <div className="form-control">
@@ -149,6 +184,11 @@ const ModalSignup = () => {
                 {...form.register("password")}
                 required
               />
+              {form.formState.errors.password && (
+                <p className="text-red-500">
+                  {form.formState.errors.password.message}
+                </p>
+              )}
             </div>
 
             <div className="form-control">
@@ -160,6 +200,11 @@ const ModalSignup = () => {
                 {...form.register("confirmPassword")}
                 required
               />
+              {form.formState.errors.confirmPassword && (
+                <p className="text-red-500">
+                  {form.formState.errors.confirmPassword.message}
+                </p>
+              )}
             </div>
 
             <div className="form-control mt-6">
